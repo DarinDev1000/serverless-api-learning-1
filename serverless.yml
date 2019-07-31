@@ -30,6 +30,8 @@ functions:
           path: hello
   getMessages:
     handler: handler.getMessages
+    memorySize: 128
+    description: Get all messages
     events:
       - http:
           method: get
