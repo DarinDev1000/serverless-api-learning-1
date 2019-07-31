@@ -4,8 +4,10 @@ const mysql = require('mysql2/promise');
 
 export class MessagesService {
 
-  static async getMessages() {
+  static async getMessages(input) {
     // const con = this.createDatabaseConnection();
+
+    // console.log('input: ', input);
 
     console.log('stage: ', process.env.STAGE);
     // console.log('db host: ', process.env.MYSQL_HOST);

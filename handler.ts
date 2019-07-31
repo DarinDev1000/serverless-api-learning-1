@@ -18,13 +18,13 @@ export const hello: APIGatewayProxyHandler = async (event, _context) => {
 };
 
 export const getMessages: APIGatewayProxyHandler = async (event, _context) => {
-  const messageData = await messages.getMessages();
-  const input = event;
+  const messageData = await messages.getMessages(event);
   return {
     statusCode: 200,
     body: JSON.stringify(
       {
-        messages: messageData
+        messages: messageData,
+        input: event
       },
       null,
       2
