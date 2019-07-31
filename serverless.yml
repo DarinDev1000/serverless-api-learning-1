@@ -12,14 +12,14 @@ provider:
   name: aws
   runtime: nodejs10.x
   region: us-east-1
-  stage: ${opt:stage, 'dev'}
+  stage: ${opt:stage, 'local'}
   profile: default
   environment:
     STAGE: ${self:provider.stage}
-    MYSQL_HOST: ${file(env.yml):MYSQL_HOST}
-    MYSQL_DATABASE: ${file(env.yml):MYSQL_DATABASE}
-    MYSQL_USER: ${file(env.yml):MYSQL_USER}
-    MYSQL_PASS: ${file(env.yml):MYSQL_PASS}
+    MYSQL_HOST: ${self:custom.mysqlHost.${self:provider.stage}}
+    MYSQL_DATABASE: ${self:custom.mysqlDatabase.${self:provider.stage}}
+    MYSQL_USER: ${self:custom.mysqlUser.${self:provider.stage}}
+    MYSQL_PASS: ${self:custom.mysqlPass.${self:provider.stage}}
 
 functions:
   hello:
