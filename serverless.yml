@@ -27,13 +27,13 @@ functions:
       - http:
           method: get
           path: hello
-  hello:
+  getMessages:
     handler: handler.getMessages
     events:
       - http:
           method: get
           path: getMessages
-  
+
 custom:
   mysqlHost:
     local: ${file(env.yml):LOCAL_MYSQL_HOST}

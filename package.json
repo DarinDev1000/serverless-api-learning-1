@@ -7,7 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "deploy": "sls deploy -s dev",
     "logs": "sls logs -f alexa",
-    "pretty": "prettier --write '*.{ts,js,yml,json}'"
+    "pretty": "prettier --write '*.{ts,js,yml,json}'",
+    "offline": "sls offline --port 3005",
+    "getMessages": "sls invoke local -f getMessages"
   },
   "dependencies": {
     "mysql2": "^1.6.5",
