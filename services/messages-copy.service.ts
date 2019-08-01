@@ -1,6 +1,6 @@
-// import { mysql2 as mysql} from "mysql2/promise";
-const mysql = require('mysql2/promise');
-// import { DatabaseService as db } from "./database.service";
+import { mysql2 as mysql} from "mysql2/promise";
+// const mysql = require('mysql2/promise');
+import { DatabaseService as db } from "./database.service";
 
 export class MessagesService {
 
@@ -15,18 +15,13 @@ export class MessagesService {
     // console.log('db host: ', process.env.MYSQL_PASS);
     // console.log('db host: ', process.env.MYSQL_DATABASE);
 
-    const databaseInfo = {
-      host: process.env.MYSQL_HOST,
-      user: process.env.MYSQL_USER,
-      password: process.env.MYSQL_PASS,
-      database: process.env.MYSQL_DATABASE
-    };
-    const con = await mysql.createConnection(databaseInfo);
+
+    const con = await db.createDatabaseConnection();
 
 
     try {
       // const [rows, fields] = await con.execute('SELECT * FROM messages');
-      const [messages] = await con.execute('SELECT * FROM messages');
+      const [messages] = await con.query('SELECT * FROM messages');
       console.log(messages);
       return messages;
     } catch (e) {
@@ -43,7 +38,8 @@ export class MessagesService {
   //       password: process.env.MYSQL_PASS,
   //       database: process.env.MYSQL_DATABASE
   //     };
-  //     return await mysql.createConnection(databaseInfo);
+  //     const dbc = await mysql.createConnection(databaseInfo);
+  //     return dbc;
   //   } catch (e) {
   //     console.error(e);
   //     throw e;

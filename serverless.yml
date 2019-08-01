@@ -29,13 +29,16 @@ functions:
           method: get
           path: hello
   getMessages:
-    handler: handler.getMessages
+    handler: api.getMessages
     memorySize: 128
     description: Get all messages
     events:
       - http:
           method: get
           path: getMessages
+      - http:
+          method: get
+          path: getMessages/{id}
 
 custom:
   mysqlHost:
