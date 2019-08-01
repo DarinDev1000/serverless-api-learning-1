@@ -26,9 +26,44 @@ export class MessagesService {
 
     try {
       // const [rows, fields] = await con.execute('SELECT * FROM messages');
-      const [messages] = await con.execute('SELECT * FROM messages');
+      const [messages] = await con.query('SELECT * FROM messages');
       console.log(messages);
       return messages;
+    } catch (e) {
+      console.error(e);
+      throw e;
+    }
+  }
+
+  static async addMessages(data) {
+    console.log('stage: ', process.env.STAGE);
+
+    const databaseInfo = {
+      host: process.env.MYSQL_HOST,
+      user: process.env.MYSQL_USER,
+      password: process.env.MYSQL_PASS,
+      database: process.env.MYSQL_DATABASE
+    };
+    const con = await mysql.createConnection(databaseInfo);
+
+    // console.log('Data: ', data);
+
+    try {
+      let numberAdded = 0;
+      for (const id in data) {
+        // console.log(data[id]);
+        // const [response] = await con.query(`
+        await con.query(`
+          INSERT INTO messages (messageTitle, messageContent)
+          VALUES (?, ?)`,
+          [data[id].messageTitle, data[id].messageContent]
+        );
+        // console.log(response);
+        numberAdded++;
+      }
+      const response = `Added ${numberAdded} messages!`;
+      console.log(response);
+      return response;
     } catch (e) {
       console.error(e);
       throw e;

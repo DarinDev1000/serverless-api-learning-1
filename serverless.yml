@@ -22,12 +22,14 @@ provider:
     MYSQL_PASS: ${self:custom.mysqlPass.${self:provider.stage}}
 
 functions:
+
   hello:
     handler: handler.hello
     events:
       - http:
           method: get
           path: hello
+
   getMessages:
     handler: api.getMessages
     memorySize: 128
@@ -35,10 +37,19 @@ functions:
     events:
       - http:
           method: get
-          path: getMessages
+          path: "message/get"
+      # - http:
+      #     method: get
+      #     path: message/get/{id}
+
+  addMessage:
+    handler: api.addMessage
+    memorySize: 128
+    description: Add a message
+    events:
       - http:
-          method: get
-          path: getMessages/{id}
+          method: post
+          path: message/add
 
 custom:
   mysqlHost:
