@@ -22,7 +22,6 @@ provider:
     MYSQL_PASS: ${self:custom.mysqlPass.${self:provider.stage}}
 
 functions:
-
   hello:
     handler: handler.hello
     events:
